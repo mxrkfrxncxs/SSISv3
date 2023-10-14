@@ -25,4 +25,16 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
     
+    @app.route('/students/')
+    def students():
+        return render_template('students.html')
+    
+    @app.route('/courses/')
+    def courses():
+        return render_template('courses.html')
+    
+    @app.route('/colleges/')
+    def colleges():
+        return render_template('colleges.html')
+    
     return app
