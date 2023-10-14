@@ -21,8 +21,4 @@ def create_app(test_config=None):
     mysql.init_app(app)
     CSRFProtect(app)
 
-    from .user import user_bp as user_blueprint
-    app.register_blueprint(user_blueprint)
-
-
     return app
