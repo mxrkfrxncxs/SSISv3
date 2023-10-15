@@ -17,3 +17,43 @@
   </ul>
 </div>
 {% endblock %}
+{% block content2%}
+<div class="container">
+  <div class="row">
+      <div class="col">
+          <div id="studentTableDiv">
+              <table class="table table-hover text-center">
+                  <thead>
+                      <tr>
+                          <th>Course Code</th>
+                          <th>Course Name</th>
+                          <th>College Code</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>BSCS</td>
+                          <td>BS Computer Science</td>
+                          <td>CCS</td>
+                          <td>
+                              <button class="btn btn-warning btn-sm">Edit</button>
+                              <button class="btn btn-danger btn-sm">Delete</button>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>BSMATH</td>
+                          <td>BS Mathematics</td>
+                          <td>CSM</td>
+                          <td>
+                              <button class="btn btn-warning btn-sm">Edit</button>
+                              <button class="btn btn-danger btn-sm">Delete</button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
