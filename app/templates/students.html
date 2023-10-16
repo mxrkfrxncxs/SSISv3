@@ -22,7 +22,7 @@
   <div class="row">
       <div class="col">
           <div id="studentTableDiv">
-              <table class="table table-hover text-center">
+              <table class="table table-condensed text-center">
                   <thead>
                       <tr>
                           <th>ID</th>
@@ -35,42 +35,20 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td>2022-0001</td>
-                          <td>John</td>
-                          <td>Doe</td>
-                          <td>BSCS</td>
-                          <td>2</td>
-                          <td>Male</td>
-                          <td>
-                              <button class="btn btn-warning btn-sm">Edit</button>
-                              <button class="btn btn-danger btn-sm">Delete</button>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>2023-0001</td>
-                          <td>Jane</td>
-                          <td>Smith</td>
-                          <td>BSMATH</td>
-                          <td>1</td>
-                          <td>Female</td>
-                          <td>
-                              <button class="btn btn-warning btn-sm">Edit</button>
-                              <button class="btn btn-danger btn-sm">Delete</button>
-                          </td>
-                      </tr>
-                      <tr>
-                        <td>2021-2393</td>
-                        <td>Mark Francis</td>
-                        <td>Venus</td>
-                        <td>BSCS</td>
-                        <td>1</td>
-                        <td>Male</td>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.firstname }}</td>
+                        <td>{{ student.lastname }}</td>
+                        <td>{{ student.coursecode }}</td>
+                        <td>{{ student.yearlevel }}</td>
+                        <td>{{ student.gender }}</td>
                         <td>
-                            <button class="btn btn-warning btn-sm">Edit</button>
-                            <button class="btn btn-danger btn-sm">Delete</button>
-                        </td>
+                          <button class="btn btn-warning btn-sm">Edit</button>
+                          <button class="btn btn-danger btn-sm">Delete</button>
+                      </td>
                     </tr>
+                    {% endfor %}
                   </tbody>
               </table>
           </div>
