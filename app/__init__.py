@@ -27,26 +27,32 @@ def create_app(test_config=None):
     
     @app.route('/students/')
     def students():
-        # Connect to the MySQL database
         connection = mysql.connection
         cursor = connection.cursor(dictionary=True)
-
-        # Perform a query to retrieve data
         query = "SELECT * FROM student"
         cursor.execute(query)
-        students = cursor.fetchall()
-
-        # Close the cursor and the database connection
+        student = cursor.fetchall()
         cursor.close()
-
-        return render_template('students.html', students=students)
+        return render_template('students.html', students=student)
     
     @app.route('/courses/')
     def courses():
-        return render_template('courses.html')
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+        query = "SELECT * FROM course"
+        cursor.execute(query)
+        course = cursor.fetchall()
+        cursor.close()
+        return render_template('courses.html', courses=course)
     
     @app.route('/colleges/')
     def colleges():
-        return render_template('colleges.html')
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+        query = "SELECT * FROM college"
+        cursor.execute(query)
+        college = cursor.fetchall()
+        cursor.close()
+        return render_template('colleges.html', colleges=college)
     
     return app
