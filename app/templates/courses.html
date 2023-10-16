@@ -32,24 +32,17 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td>BSCS</td>
-                          <td>BS Computer Science</td>
-                          <td>CCS</td>
-                          <td>
-                              <button class="btn btn-warning btn-sm">Edit</button>
-                              <button class="btn btn-danger btn-sm">Delete</button>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>BSMATH</td>
-                          <td>BS Mathematics</td>
-                          <td>CSM</td>
-                          <td>
-                              <button class="btn btn-warning btn-sm">Edit</button>
-                              <button class="btn btn-danger btn-sm">Delete</button>
-                          </td>
-                      </tr>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course.coursecode }}</td>
+                        <td>{{ course.coursename }}</td>
+                        <td>{{ course.collegecode }}</td>
+                        <td>
+                          <button class="btn btn-warning btn-sm">Edit</button>
+                          <button class="btn btn-danger btn-sm">Delete</button>
+                      </td>
+                    </tr>
+                    {% endfor %}
                   </tbody>
               </table>
           </div>

@@ -31,22 +31,16 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td>CCS</td>
-                          <td>College of Computer Studies</td>
-                          <td>
-                              <button class="btn btn-warning btn-sm">Edit</button>
-                              <button class="btn btn-danger btn-sm">Delete</button>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>CSM</td>
-                          <td>College of Science and Mathematics</td>
-                          <td>
-                              <button class="btn btn-warning btn-sm">Edit</button>
-                              <button class="btn btn-danger btn-sm">Delete</button>
-                          </td>
-                      </tr>
+                    {% for college in colleges %}
+                    <tr>
+                        <td>{{ college.collegecode }}</td>
+                        <td>{{ college.collegename }}</td>
+                        <td>
+                          <button class="btn btn-warning btn-sm">Edit</button>
+                          <button class="btn btn-danger btn-sm">Delete</button>
+                      </td>
+                    </tr>
+                    {% endfor %}
                   </tbody>
               </table>
           </div>
