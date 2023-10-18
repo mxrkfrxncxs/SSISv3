@@ -38,15 +38,32 @@
                 </div>
                 <div class="form-group">
                     <label for="course_code">Course Code</label>
-                    <input type="text" class="form-control" id="course_code" name="course_code" required>
-                </div>
+                    <select class="form-control" id="course_code" name="course_code" required>
+                        <option value="" disabled selected>--Select Course Code--</option>
+                        {% for course in courses %}
+                            <option value="{{ course.coursecode }}">{{ course.coursecode }}</option>
+                        {% endfor %}
+                    </select>
+                </div>                
                 <div class="form-group">
                     <label for="year_level">Year Level</label>
-                    <input type="int" class="form-control" id="year_level" name="year_level" required>
-                </div>
+                    <select class="form-control" id="year_level" name="year_level" required>
+                        <option value="" disabled selected>--Select Year Level--</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>                
                 <div class="form-group">
                     <label for="gender">Gender</label>
-                    <input type="text" class="form-control" id="gender" name="gender" required>
+                    <select class="form-control" id="gender" name="gender" required>
+                        <option value="" disabled selected>--Select Gender--</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
                 </div> <br>
                 <button type="submit" class="btn btn-primary col-md-12">Add Student</button>
             </form>

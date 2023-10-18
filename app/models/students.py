@@ -20,3 +20,11 @@ def remove_student(student_id):
     cursor.execute("DELETE FROM student WHERE id = %s", (student_id,))
     mysql.connection.commit()
     cursor.close()
+    
+def get_course_codes():
+    cursor = mysql.connection.cursor(dictionary=True)
+    query = "SELECT coursecode FROM course"
+    cursor.execute(query)
+    course_code = cursor.fetchall()
+    cursor.close()
+    return course_code

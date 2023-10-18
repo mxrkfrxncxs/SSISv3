@@ -60,7 +60,7 @@
                       <td>{{ student.gender }}</td>
                       <td>
                         <button class="btn btn-warning btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" onclick="confirmDeleteStudent(this)">Delete</button>
+                        <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" csrf-token = "{{ csrf_token() }}" onclick="confirmDeleteStudent(this)">Delete</button>
                       </td>
                     </tr>
                     {% endfor %}

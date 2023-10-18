@@ -1,5 +1,6 @@
 from flask import *
 from app.models.students import * 
+from app.models.courses import *
 
 students_bp = Blueprint('students', __name__)
 
@@ -19,10 +20,12 @@ def add_student():
         gender = request.form['gender'].capitalize()
         insert_student(student_id, first_name, last_name, course_code, year_level, gender)
         return redirect('/students/') 
-    return render_template('addstudent.html')
+    courses = get_course_codes()
+    return render_template('addstudent.html', courses=courses)
 
 @students_bp.route('/delete_student/<string:student_id>', methods=['DELETE'])
 def delete_student(student_id):
+    print ("Deleting student")
     if request.method == 'DELETE':
         remove_student(student_id)
-        return redirect('/students/') 
+        return jsonify({'success': True})
