@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content1 %}
-  <title>Students | Student Information System</title>
+  <title>Students</title>
 {% endblock %}
 {% block toggle %}
 <div class="collapse navbar-collapse btn btn-primary btn-block" id="navbarNav">
@@ -18,10 +18,25 @@
 </div>
 {% endblock %}
 {% block content2 %}
+<div class="container" style = "padding-top: 10px;">
+  <div class="row">
+      <div class="col-md-10">
+          <div class="input-group mb-3">
+              <input type="text" class="form-control col-md-10">
+              <div class="input-group-append">
+                  <button class="btn btn-primary" type="button">Search</button>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-2">
+          <a class="btn btn-success col-md-12" href="/add_student">Add</a>
+      </div>
+  </div>
+</div>
 <div class="container">
   <div class="row">
       <div class="col">
-          <div id="studentTableDiv">
+          <div id="studentTableDiv" style="max-height: 500px; overflow: auto;">
               <table class="table table-condensed text-center">
                   <thead>
                       <tr>
@@ -37,15 +52,15 @@
                   <tbody>
                     {% for student in students %}
                     <tr>
-                        <td>{{ student.id }}</td>
-                        <td>{{ student.firstname }}</td>
-                        <td>{{ student.lastname }}</td>
-                        <td>{{ student.coursecode }}</td>
-                        <td>{{ student.yearlevel }}</td>
-                        <td>{{ student.gender }}</td>
-                        <td>
-                          <button class="btn btn-warning btn-sm">Edit</button>
-                          <button class="btn btn-danger btn-sm">Delete</button>
+                      <td>{{ student.id }}</td>
+                      <td>{{ student.firstname }}</td>
+                      <td>{{ student.lastname }}</td>
+                      <td>{{ student.coursecode }}</td>
+                      <td>{{ student.yearlevel }}</td>
+                      <td>{{ student.gender }}</td>
+                      <td>
+                        <button class="btn btn-warning btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" onclick="confirmDeleteStudent(this)">Delete</button>
                       </td>
                     </tr>
                     {% endfor %}
