@@ -9,12 +9,32 @@ def get_students():
     cursor.close()
     return students
 
+def find_students(searchstudent):
+    cursor = mysql.connection.cursor(dictionary=True)
+    search_query = "%" + searchstudent + "%"
+    cursor.execute("SELECT * FROM student WHERE id LIKE %s OR firstname LIKE %s OR lastname LIKE %s OR coursecode LIKE %s OR yearlevel LIKE %s OR gender LIKE %s", (search_query, search_query, search_query, search_query, search_query, search_query))
+    students = cursor.fetchall()
+    cursor.close()
+    return students
+
 def insert_student(student_id, first_name, last_name, course_code, year_level, gender):
     cursor = mysql.connection.cursor()
     cursor.execute("INSERT INTO student (id, firstname, lastname, coursecode, yearlevel, gender) VALUES (%s, %s, %s, %s, %s, %s)", (student_id, first_name, last_name, course_code, year_level, gender))
     mysql.connection.commit()
     cursor.close()
     
+def update_student(student_id, first_name, last_name, course_code, year_level, gender):
+    cursor = mysql.connection.cursor()
+    update_query = "UPDATE student SET firstname = %s, lastname = %s, coursecode = %s, yearlevel = %s, gender = %s WHERE id = %s"
+    try:
+        cursor.execute(update_query, (first_name, last_name, course_code, year_level, gender, student_id))
+        mysql.connection.commit()
+    except mysql.Error as err:
+        print("Error: {}".format(err))
+        mysql.connection.rollback()
+    finally:
+        cursor.close()
+
 def remove_student(student_id):
     cursor = mysql.connection.cursor()
     cursor.execute("DELETE FROM student WHERE id = %s", (student_id,))

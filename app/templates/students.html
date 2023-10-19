@@ -20,17 +20,20 @@
 {% block content2 %}
 <div class="container" style = "padding-top: 10px;">
   <div class="row">
-      <div class="col-md-10">
-          <div class="input-group mb-3">
-              <input type="text" class="form-control col-md-10">
-              <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">Search</button>
-              </div>
-          </div>
-      </div>
-      <div class="col-md-2">
-          <a class="btn btn-success col-md-12" href="/add_student">Add</a>
-      </div>
+    <div class="col-md-10">
+      <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control col-md-10" name="studentsearch" placeholder="Search Student">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-success col-md-12" href="/add_student">Add</a>
+    </div>
   </div>
 </div>
 <div class="container">
@@ -59,7 +62,7 @@
                       <td>{{ student.yearlevel }}</td>
                       <td>{{ student.gender }}</td>
                       <td>
-                        <button class="btn btn-warning btn-sm">Edit</button>
+                        <button class="btn btn-warning btn-sm" onclick="editStudent('{{ student.id }}', '{{ student.firstname }}', '{{ student.lastname }}', '{{ student.coursecode }}', '{{ student.yearlevel }}', '{{ student.gender }}')">Edit</button>
                         <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" csrf-token = "{{ csrf_token() }}" onclick="confirmDeleteStudent(this)">Delete</button>
                       </td>
                     </tr>

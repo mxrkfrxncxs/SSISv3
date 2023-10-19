@@ -17,3 +17,7 @@ function confirmDeleteStudent(button) {
         });
     }
 }
+
+function editStudent(id, firstname, lastname, coursecode, yearlevel, gender) {
+    window.location.href = `/edit_student?student_id=${id}&first_name=${firstname}&last_name=${lastname}&course_code=${coursecode}&year_level=${yearlevel}&gender=${gender}`;
+}
