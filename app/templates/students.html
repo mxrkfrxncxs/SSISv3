@@ -21,7 +21,7 @@
 <div class="container" style = "padding-top: 10px;">
   <div class="row">
     <div class="col-md-10">
-      <form method="POST">
+      <form method="POST" action="/students/search"> 
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="input-group mb-3">
             <input type="text" class="form-control col-md-10" name="studentsearch" placeholder="Search Student">
@@ -62,8 +62,16 @@
                       <td>{{ student.yearlevel }}</td>
                       <td>{{ student.gender }}</td>
                       <td>
-                        <button class="btn btn-warning btn-sm" onclick="editStudent('{{ student.id }}', '{{ student.firstname }}', '{{ student.lastname }}', '{{ student.coursecode }}', '{{ student.yearlevel }}', '{{ student.gender }}')">Edit</button>
-                        <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" csrf-token = "{{ csrf_token() }}" onclick="confirmDeleteStudent(this)">Delete</button>
+                        <form action="/edit_student" method="get">
+                          <input type="hidden" name="student_id" value="{{ student.id }}">
+                          <input type="hidden" name="first_name" value="{{ student.firstname }}">
+                          <input type="hidden" name="last_name" value="{{ student.lastname }}">
+                          <input type="hidden" name="course_code" value="{{ student.coursecode }}">
+                          <input type="hidden" name="year_level" value="{{ student.yearlevel }}">
+                          <input type="hidden" name="gender" value="{{ student.gender }}">
+                          <button class="btn btn-warning btn-sm" type="submit">Edit</button>
+                          <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteStudent(this)">Delete</button>
+                        </form>
                       </td>
                     </tr>
                     {% endfor %}

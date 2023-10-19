@@ -9,6 +9,14 @@ def colleges():
     colleges = get_colleges()
     return render_template('colleges.html', colleges=colleges)
 
+@colleges_bp.route('/colleges/search', methods=['GET', 'POST'])
+def search_college():
+    colleges = []
+    if request.method == 'POST':
+        search_query = request.form.get('collegesearch')
+        if search_query:
+            colleges = find_colleges(search_query)
+    return render_template('colleges.html', colleges=colleges)
 
 @colleges_bp.route('/add_college', methods=['GET', 'POST'])
 def add_college():

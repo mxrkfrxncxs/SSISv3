@@ -26,14 +26,9 @@ def insert_student(student_id, first_name, last_name, course_code, year_level, g
 def update_student(student_id, first_name, last_name, course_code, year_level, gender):
     cursor = mysql.connection.cursor()
     update_query = "UPDATE student SET firstname = %s, lastname = %s, coursecode = %s, yearlevel = %s, gender = %s WHERE id = %s"
-    try:
-        cursor.execute(update_query, (first_name, last_name, course_code, year_level, gender, student_id))
-        mysql.connection.commit()
-    except mysql.Error as err:
-        print("Error: {}".format(err))
-        mysql.connection.rollback()
-    finally:
-        cursor.close()
+    cursor.execute(update_query, (first_name, last_name, course_code, year_level, gender, student_id))
+    mysql.connection.commit()
+    cursor.close()
 
 def remove_student(student_id):
     cursor = mysql.connection.cursor()

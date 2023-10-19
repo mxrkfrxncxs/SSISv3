@@ -21,12 +21,15 @@
 <div class="container" style = "padding-top: 10px;">
   <div class="row">
       <div class="col-md-10">
+        <form method="POST" action="/courses/search">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <div class="input-group mb-3">
-              <input type="text" class="form-control col-md-10">
+              <input type="text" class="form-control col-md-10" name="coursesearch" placeholder="Search Course">
               <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">Search</button>
+                  <button class="btn btn-primary" type="submit">Search</button>
               </div>
           </div>
+        </form>
       </div>
       <div class="col-md-2">
           <a class="btn btn-success col-md-12" href="/add_course">Add</a>
@@ -36,7 +39,7 @@
 <div class="container">
   <div class="row">
       <div class="col">
-          <div id="coursesTableDiv">
+          <div id="coursesTableDiv"  style="max-height: 500px; overflow: auto;">
               <table class="table table-condensed text-center">
                   <thead>
                       <tr>
@@ -49,12 +52,17 @@
                   <tbody>
                     {% for course in courses %}
                     <tr>
-                        <td>{{ course.coursecode }}</td>
-                        <td>{{ course.coursename }}</td>
-                        <td>{{ course.collegecode }}</td>
-                        <td>
-                          <button class="btn btn-warning btn-sm">Edit</button>
-                          <button class="btn btn-danger btn-sm">Delete</button>
+                      <td>{{ course.coursecode }}</td>
+                      <td>{{ course.coursename }}</td>
+                      <td>{{ course.collegecode }}</td>
+                      <td>
+                        <form method="get" action="/edit_course">
+                          <input type="hidden" name="course_code" value="{{ course.coursecode }}">
+                          <input type="hidden" name="course_name" value="{{ course.coursename }}">
+                          <input type="hidden" name="college_code" value="{{ course.collegecode }}">
+                          <button class="btn btn-warning btn-sm" type="submit">Edit</button>
+                          <button class="btn btn-danger btn-sm" course-code="{{ course.coursecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCourse(this)">Delete</button>
+                        </form>
                       </td>
                     </tr>
                     {% endfor %}

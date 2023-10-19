@@ -21,12 +21,15 @@
 <div class="container" style = "padding-top: 10px;">
   <div class="row">
       <div class="col-md-10">
+        <form method="POST" action="/colleges/search">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <div class="input-group mb-3">
-              <input type="text" class="form-control col-md-10">
+              <input type="text" class="form-control col-md-10" name="collegesearch" placeholder="Search College">
               <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">Search</button>
+                  <button class="btn btn-primary" type="submit">Search</button>
               </div>
           </div>
+        </form>
       </div>
       <div class="col-md-2">
           <a class="btn btn-success col-md-12" href="/add_college">Add</a>

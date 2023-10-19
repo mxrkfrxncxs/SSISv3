@@ -1,6 +1,5 @@
 from flask import *
-from app.models.students import * 
-from app.models.courses import *
+from app.models.students import *
 
 students_bp = Blueprint('students', __name__)
 
@@ -9,8 +8,8 @@ def students():
     students = get_students()
     return render_template('students.html', students=students)
 
-@students_bp.route('/students/', methods=['GET', 'POST'])
-def search_students():
+@students_bp.route('/students/search', methods=['GET', 'POST'])
+def search_student():
     students = []
     if request.method == 'POST':
         search_query = request.form.get('studentsearch')
@@ -55,7 +54,6 @@ def edit_student():
 
 @students_bp.route('/delete_student/<string:student_id>', methods=['DELETE'])
 def delete_student(student_id):
-    print ("Deleting student")
     if request.method == 'DELETE':
         remove_student(student_id)
         return jsonify({'success': True})
