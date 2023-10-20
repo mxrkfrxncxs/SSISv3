@@ -1,7 +1,7 @@
 function confirmDeleteStudent(button) {
     var student_id = button.getAttribute('student-id');
     var csrfToken = button.getAttribute('csrf-token');
-    if (confirm("Are you sure you want to delete Student " + student_id + "?\nAction cannot be undone\n.")) {
+    if (confirm("Are you sure you want to delete Student " + student_id + "?\n")) {
         fetch(`/delete_student/${student_id}`, {
             method: 'DELETE',
             headers: {

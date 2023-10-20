@@ -14,8 +14,3 @@ td form,
 td button {
   display: inline-block;
 }
-
-#course_code, #college_code {
-  max-height: 100px;
-  overflow: auto;
-}
