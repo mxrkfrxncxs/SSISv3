@@ -25,6 +25,8 @@ def add_course():
         college_code = request.form['college_code']
         if check(course_code):
             flash('Course Code already exists!', 'error')
+        elif len(course_code)> 20:
+            flash('Course Code too long!', 'error')
         else:
             insert_course(course_code, course_name, college_code)
             flash('Course added successfully!', 'success')

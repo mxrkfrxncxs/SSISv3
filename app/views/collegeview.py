@@ -25,6 +25,8 @@ def add_college():
         college_name = request.form['college_name']
         if check(college_code):
             flash('College Code already exists!', 'error')
+        elif len(college_code)> 20:
+            flash('College Code too long!', 'error')
         else:
             insert_college(college_code, college_name)
             flash('College added successfully!', 'success')

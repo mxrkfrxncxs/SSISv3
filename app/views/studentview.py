@@ -28,6 +28,8 @@ def add_student():
         gender = request.form['gender'].capitalize()
         if check(student_id):
             flash('Student ID already exists!', 'error')
+        elif len(student_id)> 10:
+            flash('Student ID too long!', 'error')
         else:
             insert_student(student_id, first_name, last_name, course_code, year_level, gender)
             flash('Student added successfully!', 'success')
