@@ -21,6 +21,19 @@
         {% endblock %}
       </div>
     </nav>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.category == 'error' %}
+            <div class="flash-container flash-error">{{ message }}</div>
+          {% elif message.category == 'success' %}
+            <div class="flash-container flash-success">{{ message }}</div>
+          {% elif message.category == 'info' %}
+            <div class="flash-container flash-info">{{ message }}</div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     {% block content2 %}
     
     {% endblock %}

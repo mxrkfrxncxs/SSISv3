@@ -60,9 +60,9 @@
                             <input type="hidden" name="course_code" value="{{ course.coursecode }}">
                             <input type="hidden" name="course_name" value="{{ course.coursename }}">
                             <input type="hidden" name="college_code" value="{{ course.collegecode }}">
-                            <button class="btn btn-warning btn-sm col-md-5" type="submit" style="display: inline-block;">Edit</button>
+                            <button class="btn btn-warning btn-sm" type="submit">Edit</button>
                         </form>
-                        <button class="btn btn-danger btn-sm" course-code="{{ course.coursecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCourse(this)" style="display: inline-block;">Delete</button>
+                        <button class="btn btn-danger btn-sm" course-code="{{ course.coursecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCourse(this)">Delete</button>
                       </td>                    
                     </tr>
                     {% endfor %}

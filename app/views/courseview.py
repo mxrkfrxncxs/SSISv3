@@ -23,8 +23,11 @@ def add_course():
         course_code = request.form['course_code']
         course_name = request.form['course_name']
         college_code = request.form['college_code']
-        insert_course(course_code, course_name, college_code)
-        return redirect('/courses') 
+        if check(course_code):
+            flash('Course code already exists!', 'error')
+        else:
+            insert_course(course_code, course_name, college_code)
+            return redirect('/courses') 
     colleges = get_college_codes()
     return render_template('addcourse.html', colleges=colleges)
 

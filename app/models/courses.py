@@ -18,6 +18,15 @@ def find_courses(searchcourse):
     cursor.close()
     return result
 
+def check(course_code):
+    cursor = mysql.connection.cursor()
+    query = "SELECT * FROM course WHERE coursecode = %s"
+    cursor.execute(query, (course_code,))
+    result = cursor.fetchone()
+    cursor.close()
+    if result:
+        return True
+
 def insert_course(course_code, course_name, college_code):
     cursor = mysql.connection.cursor()
     cursor.execute("INSERT INTO course (coursecode, coursename, collegecode) VALUES (%s, %s, %s)", (course_code, course_name, college_code))

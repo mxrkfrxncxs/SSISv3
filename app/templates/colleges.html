@@ -58,8 +58,8 @@
                             <input type="hidden" name="college_code" value="{{ college.collegecode }}">
                             <input type="hidden" name="college_name" value="{{ college.collegename }}">
                             <button class="btn btn-warning btn-sm" type="submit">Edit</button>
-                            <button class="btn btn-danger btn-sm" college-code="{{ college.collegecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCollege(this)">Delete</button>
                           </form>
+                          <button class="btn btn-danger btn-sm" college-code="{{ college.collegecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCollege(this)">Delete</button>
                       </td>
                     </tr>
                     {% endfor %}
