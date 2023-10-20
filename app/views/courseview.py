@@ -24,9 +24,10 @@ def add_course():
         course_name = request.form['course_name']
         college_code = request.form['college_code']
         if check(course_code):
-            flash('Course code already exists!', 'error')
+            flash('Course Code already exists!', 'error')
         else:
             insert_course(course_code, course_name, college_code)
+            flash('Course added successfully!', 'success')
             return redirect('/courses') 
     colleges = get_college_codes()
     return render_template('addcourse.html', colleges=colleges)
@@ -37,8 +38,8 @@ def edit_course():
         course_code = request.form.get('course_code')
         course_name = request.form.get('course_name')
         college_code = request.form.get('college_code')
-        print(course_code, course_name, college_code)
         update_course(course_code, course_name, college_code)
+        flash('Course updated successfully!', 'success')
         return redirect('/courses/') 
     course_code = request.args.get('course_code')
     course_name = request.args.get('course_name')
@@ -50,4 +51,5 @@ def edit_course():
 def delete_course(course_code):
     if request.method == 'DELETE':
         remove_course(course_code)
+        flash('Course deleted successfully!', 'success')
         return jsonify({'success': True})

@@ -20,7 +20,7 @@ def find_courses(searchcourse):
 
 def check(course_code):
     cursor = mysql.connection.cursor()
-    query = "SELECT * FROM course WHERE coursecode = %s"
+    query = "SELECT coursecode FROM course WHERE coursecode = %s"
     cursor.execute(query, (course_code,))
     result = cursor.fetchone()
     cursor.close()

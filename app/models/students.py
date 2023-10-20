@@ -17,6 +17,15 @@ def find_students(searchstudent):
     cursor.close()
     return students
 
+def check(student_id):
+    cursor = mysql.connection.cursor()
+    query = "SELECT id FROM student WHERE id = %s"
+    cursor.execute(query, (student_id,))
+    result = cursor.fetchone()
+    cursor.close()
+    if result:
+        return True
+
 def insert_student(student_id, first_name, last_name, course_code, year_level, gender):
     cursor = mysql.connection.cursor()
     cursor.execute("INSERT INTO student (id, firstname, lastname, coursecode, yearlevel, gender) VALUES (%s, %s, %s, %s, %s, %s)", (student_id, first_name, last_name, course_code, year_level, gender))

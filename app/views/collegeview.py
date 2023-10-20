@@ -23,8 +23,12 @@ def add_college():
     if request.method == 'POST':
         college_code = request.form['college_code']
         college_name = request.form['college_name']
-        insert_college(college_code, college_name)
-        return redirect('/colleges') 
+        if check(college_code):
+            flash('College Code already exists!', 'error')
+        else:
+            insert_college(college_code, college_name)
+            flash('College added successfully!', 'success')
+            return redirect('/colleges') 
     return render_template('addcollege.html')
 
 @colleges_bp.route('/edit_college', methods=['GET', 'POST'])
@@ -33,7 +37,8 @@ def edit_college():
         college_code = request.form.get('college_code')
         college_name = request.form.get('college_name')
         print(college_code, college_name)
-        update_course(college_code, college_name)
+        update_college(college_code, college_name)
+        flash('College updated successfully!', 'success')
         return redirect('/colleges/') 
     college_code = request.args.get('college_code')
     college_name = request.args.get('college_name')
@@ -43,4 +48,5 @@ def edit_college():
 def delete_college(college_code):
     if request.method == 'DELETE':
         remove_college(college_code)
+        flash('College deleted successfully!', 'success')
         return jsonify({'success': True})

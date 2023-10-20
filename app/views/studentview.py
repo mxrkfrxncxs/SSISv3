@@ -26,8 +26,12 @@ def add_student():
         course_code = request.form['course_code'].upper()
         year_level = request.form['year_level']
         gender = request.form['gender'].capitalize()
-        insert_student(student_id, first_name, last_name, course_code, year_level, gender)
-        return redirect('/students/') 
+        if check(student_id):
+            flash('Student ID already exists!', 'error')
+        else:
+            insert_student(student_id, first_name, last_name, course_code, year_level, gender)
+            flash('Student added successfully!', 'success')
+            return redirect('/students/') 
     courses = get_course_codes()
     return render_template('addstudent.html', courses=courses)
 
@@ -40,8 +44,8 @@ def edit_student():
         course_code = request.form.get('course_code').upper()
         year_level = request.form.get('year_level')
         gender = request.form.get('gender').capitalize()
-        print(student_id, first_name, last_name, course_code, year_level, gender)
         update_student(student_id, first_name, last_name, course_code, year_level, gender)
+        flash('Student updated successfully!', 'success')
         return redirect('/students/') 
     student_id = request.args.get('student_id')
     first_name = request.args.get('first_name')
@@ -56,4 +60,5 @@ def edit_student():
 def delete_student(student_id):
     if request.method == 'DELETE':
         remove_student(student_id)
+        flash('Student deleted successfully!', 'success')
         return jsonify({'success': True})
