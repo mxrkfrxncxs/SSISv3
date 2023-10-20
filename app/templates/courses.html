@@ -53,7 +53,7 @@
                   <tbody>
                     {% for course in courses %}
                     <tr>
-                      <td>{{ course.coursecode }}</td>
+                      <td><a href="/view_course/{{ course.coursecode }}">{{ course.coursecode }}</a></td>
                       <td>{{ course.coursename }}</td>
                       <td>{{ course.collegecode }}</td>
                       <td>

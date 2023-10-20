@@ -64,3 +64,8 @@ def delete_student(student_id):
         remove_student(student_id)
         flash('Student deleted successfully!', 'success')
         return jsonify({'success': True})
+    
+@students_bp.route('/view_student/<string:student_id>')
+def view_student(student_id):
+    data = read_student(student_id)
+    return render_template('studentinfo.html', data=data)

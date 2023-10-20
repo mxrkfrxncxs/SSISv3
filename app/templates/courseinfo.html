@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content1 %}
+<title>Course Information</title>
+{% endblock %}
+{% block toggle %}
+<div class="collapse navbar-collapse btn btn-success btn-block" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/students">Students</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/courses" style="font-weight: bold;">Courses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/colleges">Colleges</a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}
+{% block content2 %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10" style="overflow: auto;">
+            <h1 class="text-center" style="padding: 5px;">Course Information</h1>
+            <form class="form-control" style="max-height: 440px; overflow:auto;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label for="course_code">Course Code</label>
+                    <input type="text" class="form-control" id="course_code" name="course_code" value = "{{ data.coursecode }}" disabled>
+                </div> <br>
+                <div class="form-group">
+                    <label for="course_name">Course Name</label>
+                    <input type="text" class="form-control" id="course_name" name="course_name" value = "{{ data.coursename }}" disabled>
+                </div> <br>
+                <div class="form-group">
+                    <label for="college_code">College Code</label>
+                    <input type="text" class="form-control" id="college_code" name="college_code" value = "{{ data.collegecode }}" disabled>
+                </div> <br>
+                <div class="form-group">
+                    <label for="college_name">College Name</label>
+                    <input type="text" class="form-control" id="college_name" name="college_name" value = "{{ data.collegename }}" disabled>
+                </div> <br>
+            </form>
+            <button type="button" class="btn btn-secondary col-md-12" onclick="window.location.href='/courses'" style="margin-top: 10px;">Back</button>
+        </div>
+    </div>
+</div>
+{% endblock%}

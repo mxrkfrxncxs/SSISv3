@@ -56,7 +56,7 @@
                   <tbody>
                     {% for student in students %}
                     <tr>
-                      <td>{{ student.id }}</td>
+                      <td><a href="/view_student/{{student.id}}">{{ student.id }}</a></td>
                       <td>{{ student.firstname }}</td>
                       <td>{{ student.lastname }}</td>
                       <td>{{ student.coursecode }}</td>

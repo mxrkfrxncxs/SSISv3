@@ -55,3 +55,8 @@ def delete_course(course_code):
         remove_course(course_code)
         flash('Course deleted successfully!', 'success')
         return jsonify({'success': True})
+    
+@courses_bp.route('/view_course/<string:course_code>', methods=['GET'])
+def view_course(course_code):
+    data = read_course(course_code)
+    return render_template('courseinfo.html', data=data)

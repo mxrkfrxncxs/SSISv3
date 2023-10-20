@@ -52,3 +52,12 @@ def get_course_codes():
     course_code = cursor.fetchall()
     cursor.close()
     return course_code
+
+def read_student(student_id):
+    cursor = mysql.connection.cursor(dictionary=True)
+    query = "SELECT student.id, student.firstname, student.lastname, student.yearlevel, student.gender, course.coursecode, course.coursename, college.collegecode, college.collegename FROM student JOIN course ON student.coursecode = course.coursecode JOIN college ON course.collegecode = college.collegecode WHERE student.id = %s"
+    cursor.execute(query, (student_id,))
+    result = cursor.fetchone()
+    cursor.close()
+    return result
+
