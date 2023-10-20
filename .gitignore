@@ -3,5 +3,3 @@
 .flaskenv
 __pycache__
 app.__pycache__
-app.models.__pycache__
-app.views.__pycache__

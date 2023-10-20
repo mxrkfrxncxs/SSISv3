@@ -57,13 +57,13 @@
                       <td>{{ course.collegecode }}</td>
                       <td>
                         <form method="get" action="/edit_course">
-                          <input type="hidden" name="course_code" value="{{ course.coursecode }}">
-                          <input type="hidden" name="course_name" value="{{ course.coursename }}">
-                          <input type="hidden" name="college_code" value="{{ course.collegecode }}">
-                          <button class="btn btn-warning btn-sm" type="submit">Edit</button>
-                          <button class="btn btn-danger btn-sm" course-code="{{ course.coursecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCourse(this)">Delete</button>
+                            <input type="hidden" name="course_code" value="{{ course.coursecode }}">
+                            <input type="hidden" name="course_name" value="{{ course.coursename }}">
+                            <input type="hidden" name="college_code" value="{{ course.collegecode }}">
+                            <button class="btn btn-warning btn-sm col-md-5" type="submit" style="display: inline-block;">Edit</button>
                         </form>
-                      </td>
+                        <button class="btn btn-danger btn-sm" course-code="{{ course.coursecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCourse(this)" style="display: inline-block;">Delete</button>
+                      </td>                    
                     </tr>
                     {% endfor %}
                   </tbody>

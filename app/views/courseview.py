@@ -20,9 +20,9 @@ def search_course():
 @courses_bp.route('/add_course', methods=['GET', 'POST'])
 def add_course():
     if request.method == 'POST':
-        course_code = request.form['course_code'].upper()
+        course_code = request.form['course_code']
         course_name = request.form['course_name']
-        college_code = request.form['college_code'].upper()
+        college_code = request.form['college_code']
         insert_course(course_code, course_name, college_code)
         return redirect('/courses') 
     colleges = get_college_codes()
@@ -33,7 +33,7 @@ def edit_course():
     if request.method == 'POST':
         course_code = request.form.get('course_code')
         course_name = request.form.get('course_name')
-        college_code = request.form.get('college_code').upper()
+        college_code = request.form.get('college_code')
         print(course_code, course_name, college_code)
         update_course(course_code, course_name, college_code)
         return redirect('/courses/') 
@@ -44,7 +44,7 @@ def edit_course():
     return render_template('editcourse.html', course_code=course_code, course_name=course_name, college_code=college_code, colleges=colleges)
 
 @courses_bp.route('/delete_course/<string:course_code>', methods=['DELETE'])
-def delete_student(course_code):
+def delete_course(course_code):
     if request.method == 'DELETE':
         remove_course(course_code)
         return jsonify({'success': True})

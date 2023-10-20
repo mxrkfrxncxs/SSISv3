@@ -26,12 +26,13 @@
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="college_code">College Code</label>
-                    <input type="text" class="form-control" id="college_code" name="college_code" required>
+                    <input type="text" class="form-control" id="college_code" name="college_code" value="{{college_code}}" disabled required>
+                    <input name="college_code" value="{{college_code}}" hidden>
                 <div class="form-group">
                     <label for="college_name">College Name</label>
-                    <input type="text" class="form-control" id="college_name" name="college_name" required>
+                    <input type="text" class="form-control" id="college_name" name="college_name" value="{{college_name}}" required>
                 </div> <br>
-                <button type="submit" class="btn btn-primary col-md-12">Add College</button>
+                <button type="submit" class="btn btn-primary col-md-12">Update College</button>
             </form>
         </div>
     </div>

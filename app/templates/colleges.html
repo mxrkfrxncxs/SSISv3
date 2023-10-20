@@ -54,8 +54,12 @@
                         <td>{{ college.collegecode }}</td>
                         <td>{{ college.collegename }}</td>
                         <td>
-                          <button class="btn btn-warning btn-sm">Edit</button>
-                          <button class="btn btn-danger btn-sm">Delete</button>
+                          <form method="get" action="/edit_college">
+                            <input type="hidden" name="college_code" value="{{ college.collegecode }}">
+                            <input type="hidden" name="college_name" value="{{ college.collegename }}">
+                            <button class="btn btn-warning btn-sm" type="submit">Edit</button>
+                            <button class="btn btn-danger btn-sm" college-code="{{ college.collegecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCollege(this)">Delete</button>
+                          </form>
                       </td>
                     </tr>
                     {% endfor %}

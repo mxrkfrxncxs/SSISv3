@@ -26,3 +26,21 @@ def add_college():
         insert_college(college_code, college_name)
         return redirect('/colleges') 
     return render_template('addcollege.html')
+
+@colleges_bp.route('/edit_college', methods=['GET', 'POST'])
+def edit_college():
+    if request.method == 'POST':
+        college_code = request.form.get('college_code')
+        college_name = request.form.get('college_name')
+        print(college_code, college_name)
+        update_course(college_code, college_name)
+        return redirect('/colleges/') 
+    college_code = request.args.get('college_code')
+    college_name = request.args.get('college_name')
+    return render_template('editcollege.html', college_code=college_code, college_name=college_name)
+
+@colleges_bp.route('/delete_college/<string:college_code>', methods=['DELETE'])
+def delete_college(college_code):
+    if request.method == 'DELETE':
+        remove_college(college_code)
+        return jsonify({'success': True})
