@@ -25,7 +25,7 @@
       <form method="POST" action="/students/search"> 
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="input-group mb-3">
-            <input type="text" class="form-control col-md-10" name="studentsearch" placeholder="Search Student">
+            <input type="text" class="form-control col-md-10" name="studentsearch" placeholder="Search Student" value="{{ search_query }}">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Search</button>
             </div>
@@ -54,28 +54,34 @@
                       </tr>
                   </thead>
                   <tbody>
-                    {% for student in students %}
+                    {% if students | length == 0 %}
                     <tr>
-                      <td><a href="/view_student/{{student.id}}">{{ student.id }}</a></td>
-                      <td>{{ student.firstname }}</td>
-                      <td>{{ student.lastname }}</td>
-                      <td>{{ student.coursecode }}</td>
-                      <td>{{ student.yearlevel }}</td>
-                      <td>{{ student.gender }}</td>
-                      <td>
-                        <form action="/edit_student" method="get">
-                          <input type="hidden" name="student_id" value="{{ student.id }}">
-                          <input type="hidden" name="first_name" value="{{ student.firstname }}">
-                          <input type="hidden" name="last_name" value="{{ student.lastname }}">
-                          <input type="hidden" name="course_code" value="{{ student.coursecode }}">
-                          <input type="hidden" name="year_level" value="{{ student.yearlevel }}">
-                          <input type="hidden" name="gender" value="{{ student.gender }}">
-                          <button class="btn btn-warning btn-sm" type="submit">Edit</button>
-                        </form>
-                        <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteStudent(this)">Delete</button>
-                      </td>
+                      <p> No student found </p>
                     </tr>
-                    {% endfor %}
+                    {% else %}
+                      {% for student in students %}
+                        <tr>
+                          <td><a href="/view_student/{{student.id}}">{{ student.id }}</a></td>
+                          <td>{{ student.firstname }}</td>
+                          <td>{{ student.lastname }}</td>
+                          <td>{{ student.coursecode }}</td>
+                          <td>{{ student.yearlevel }}</td>
+                          <td>{{ student.gender }}</td>
+                          <td>
+                            <form action="/edit_student" method="get">
+                              <input type="hidden" name="student_id" value="{{ student.id }}">
+                              <input type="hidden" name="first_name" value="{{ student.firstname }}">
+                              <input type="hidden" name="last_name" value="{{ student.lastname }}">
+                              <input type="hidden" name="course_code" value="{{ student.coursecode }}">
+                              <input type="hidden" name="year_level" value="{{ student.yearlevel }}">
+                              <input type="hidden" name="gender" value="{{ student.gender }}">
+                              <button class="btn btn-warning btn-sm" type="submit">Edit</button>
+                            </form>
+                            <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteStudent(this)">Delete</button>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    {% endif %}
                   </tbody>
               </table>
           </div>

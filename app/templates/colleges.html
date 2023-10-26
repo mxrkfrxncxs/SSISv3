@@ -25,7 +25,7 @@
         <form method="POST" action="/colleges/search">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <div class="input-group mb-3">
-              <input type="text" class="form-control col-md-10" name="collegesearch" placeholder="Search College">
+              <input type="text" class="form-control col-md-10" name="collegesearch" placeholder="Search College" value="{{ search_query }}">
               <div class="input-group-append">
                   <button class="btn btn-primary" type="submit">Search</button>
               </div>
@@ -50,20 +50,26 @@
                       </tr>
                   </thead>
                   <tbody>
-                    {% for college in colleges %}
+                    {% if colleges | length == 0 %}
                     <tr>
-                        <td>{{ college.collegecode }}</td>
-                        <td>{{ college.collegename }}</td>
-                        <td>
-                          <form method="get" action="/edit_college">
-                            <input type="hidden" name="college_code" value="{{ college.collegecode }}">
-                            <input type="hidden" name="college_name" value="{{ college.collegename }}">
-                            <button class="btn btn-warning btn-sm" type="submit">Edit</button>
-                          </form>
-                          <button class="btn btn-danger btn-sm" college-code="{{ college.collegecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCollege(this)">Delete</button>
-                      </td>
+                      <p> No college found </p>
                     </tr>
-                    {% endfor %}
+                    {% else %}
+                      {% for college in colleges %}
+                      <tr>
+                          <td>{{ college.collegecode }}</td>
+                          <td>{{ college.collegename }}</td>
+                          <td>
+                            <form method="get" action="/edit_college">
+                              <input type="hidden" name="college_code" value="{{ college.collegecode }}">
+                              <input type="hidden" name="college_name" value="{{ college.collegename }}">
+                              <button class="btn btn-warning btn-sm" type="submit">Edit</button>
+                            </form>
+                            <button class="btn btn-danger btn-sm" college-code="{{ college.collegecode }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteCollege(this)">Delete</button>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    {% endif %}
                   </tbody>
               </table>
           </div>

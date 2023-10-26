@@ -15,7 +15,7 @@ def search_course():
         search_query = request.form.get('coursesearch')
         if search_query:
             courses = find_courses(search_query)
-    return render_template('courses.html', courses=courses)
+    return render_template('courses.html', courses=courses, search_query=search_query)
 
 @courses_bp.route('/add_course', methods=['GET', 'POST'])
 def add_course():

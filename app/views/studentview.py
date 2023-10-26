@@ -1,5 +1,6 @@
 from flask import *
 from app.models.students import *
+import re
 
 students_bp = Blueprint('students', __name__)
 
@@ -15,7 +16,7 @@ def search_student():
         search_query = request.form.get('studentsearch')
         if search_query:
             students = find_students(search_query)
-    return render_template('students.html', students=students)
+    return render_template('students.html', students=students, search_query=search_query)
 
 @students_bp.route('/add_student', methods=['GET', 'POST'])
 def add_student():
@@ -26,7 +27,9 @@ def add_student():
         course_code = request.form['course_code'].upper()
         year_level = request.form['year_level']
         gender = request.form['gender'].capitalize()
-        if check(student_id):
+        if not re.match(r'^\d{4}-\d{4}$', student_id):
+            flash('Invalid Student ID format. Follow YYYY-NNNN format.', 'error')
+        elif check(student_id):
             flash('Student ID already exists!', 'error')
         elif len(student_id)> 10:
             flash('Student ID too long!', 'error')
