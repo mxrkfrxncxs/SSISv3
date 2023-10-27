@@ -1,21 +1,7 @@
 {% extends "layout.html" %}
+{% set curr_tab = "students" %}
 {% block content1 %}
 <title>Student Information</title>
-{% endblock %}
-{% block toggle %}
-<div class="collapse navbar-collapse btn btn-primary btn-block" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/students" style="font-weight: bold;">Students</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/courses">Courses</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/colleges">Colleges</a>
-      </li>
-    </ul>
-  </div>
 {% endblock %}
 {% block content2 %}
 <div class="container">
