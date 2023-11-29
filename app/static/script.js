@@ -56,4 +56,51 @@ function confirmDeleteCollege(button) {
         }
       });
   }
+  
 }
+
+const fileInput = document.getElementById('file-input');
+const fileButton = document.getElementById('file-button');
+const imagePreview = document.getElementById('student_info_image');
+const imageUrlInput = document.getElementById('image_url');
+const imagePreviewContainer = document.getElementById('student_image_container')
+const csrfToken = document.querySelector("meta[name=csrf_token]").content;
+
+fileButton.addEventListener('click', () => {
+  fileInput.click();
+});
+
+fileInput.addEventListener('change', async () => {
+    try {
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+        formData.append("csrf_token", csrfToken);
+    
+        imagePreviewContainer.innerHTML = '<div id="student_info_image"> <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div> </div>';
+
+        const response = await fetch("/upload/cloudinary/", {
+            method: 'POST',
+            body: formData,
+        });
+
+        const data = await response.json();
+
+        if (data && data.is_success) {
+
+            const img = document.createElement("img");
+            img.id = 'student_info_image';
+            img.alt = "New Image Photo"
+            img.src = data.url
+
+            imagePreviewContainer.innerHTML = '';
+            imagePreviewContainer.appendChild(img);
+            
+            imageUrlInput.value = data.url;
+        } else {
+            // Handle the case where the upload was not successful
+            console.error("Upload failed:", data);
+        }
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+});
