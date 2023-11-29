@@ -10,6 +10,9 @@
             <h1 class="text-center" style="padding: 5px;">Student Information</h1>
             <form class="form-control" style="max-height: 440px; overflow:auto;">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="student_image_container">
+                    <img id="student_info_image" src="{{ data.image_url or "https://res.cloudinary.com/dulew9heh/image/upload/v1701248545/image_nahubr.jpg" }}" alt="{{ data.id }}">
+                </div>
                 <div class="form-group">
                     <label for="student_id">Student ID</label>
                     <input type="text" class="form-control" id="student_id" name="student_id" value = "{{ data.id }}" disabled>

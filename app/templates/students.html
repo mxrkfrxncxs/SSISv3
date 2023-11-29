@@ -30,7 +30,8 @@
               <table class="table table-condensed text-center">
                   <thead>
                       <tr>
-                          <th>ID</th>
+                          <th></th>
+                          <th>ID Number</th>
                           <th>First Name</th>
                           <th>Last Name</th>
                           <th>Course</th>
@@ -42,28 +43,21 @@
                   <tbody>
                     {% if students | length == 0 %}
                     <tr>
-                      <p> No student found </p>
+                      <p> No student found. </p>
                     </tr>
                     {% else %}
                       {% for student in students %}
                         <tr>
-                          <td><a href="/view_student/{{student.id}}">{{ student.id }}</a></td>
+                          <td> <a href="/view_student/{{student.id}}"> <img id="student_image" src="{{ student.image_url or "https://res.cloudinary.com/dulew9heh/image/upload/v1701248545/image_nahubr.jpg" }}" alt="{{ student.id }}"> </a> </td>
+                          <td>{{ student.id }}</td>
                           <td>{{ student.firstname }}</td>
                           <td>{{ student.lastname }}</td>
                           <td>{{ student.coursecode }}</td>
                           <td>{{ student.yearlevel }}</td>
                           <td>{{ student.gender }}</td>
                           <td>
-                            <form action="/edit_student" method="get">
-                              <input type="hidden" name="student_id" value="{{ student.id }}">
-                              <input type="hidden" name="first_name" value="{{ student.firstname }}">
-                              <input type="hidden" name="last_name" value="{{ student.lastname }}">
-                              <input type="hidden" name="course_code" value="{{ student.coursecode }}">
-                              <input type="hidden" name="year_level" value="{{ student.yearlevel }}">
-                              <input type="hidden" name="gender" value="{{ student.gender }}">
-                              <button class="btn btn-warning btn-sm" type="submit">Edit</button>
-                            </form>
-                            <button class="btn btn-danger btn-sm" student-id="{{ student.id }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteStudent(this)">Delete</button>
+                            <a href="{{ url_for('students.edit_student', id = student.id) }}" class="btn btn-warning btn-sm" type="submit">Edit</a>
+                            <a class="btn btn-danger btn-sm" student-id="{{ student.id }}" csrf-token="{{ csrf_token() }}" onclick="confirmDeleteStudent(this)">Delete</a>
                           </td>
                         </tr>
                       {% endfor %}

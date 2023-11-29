@@ -17,6 +17,13 @@ def find_students(searchstudent):
     cursor.close()
     return students
 
+def find_student(student_id):
+    cursor = mysql.connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM student WHERE id = %s", (student_id,))
+    student = cursor.fetchone()
+    cursor.close()
+    return student
+
 def check(student_id):
     cursor = mysql.connection.cursor()
     query = "SELECT id FROM student WHERE id = %s"
@@ -26,16 +33,16 @@ def check(student_id):
     if result:
         return True
 
-def insert_student(student_id, first_name, last_name, course_code, year_level, gender):
+def insert_student(student_id, first_name, last_name, course_code, year_level, gender, image_url):
     cursor = mysql.connection.cursor()
-    cursor.execute("INSERT INTO student (id, firstname, lastname, coursecode, yearlevel, gender) VALUES (%s, %s, %s, %s, %s, %s)", (student_id, first_name, last_name, course_code, year_level, gender))
+    cursor.execute("INSERT INTO student (id, firstname, lastname, coursecode, yearlevel, gender, image_url) VALUES (%s, %s, %s, %s, %s, %s, %s)", (student_id, first_name, last_name, course_code, year_level, gender, image_url))
     mysql.connection.commit()
     cursor.close()
     
-def update_student(student_id, first_name, last_name, course_code, year_level, gender):
+def update_student(student_id, first_name, last_name, course_code, year_level, gender, image_url):
     cursor = mysql.connection.cursor()
-    update_query = "UPDATE student SET firstname = %s, lastname = %s, coursecode = %s, yearlevel = %s, gender = %s WHERE id = %s"
-    cursor.execute(update_query, (first_name, last_name, course_code, year_level, gender, student_id))
+    update_query = "UPDATE student SET firstname = %s, lastname = %s, coursecode = %s, yearlevel = %s, gender = %s, image_url = %s WHERE id = %s"
+    cursor.execute(update_query, (first_name, last_name, course_code, year_level, gender, image_url, student_id))
     mysql.connection.commit()
     cursor.close()
 

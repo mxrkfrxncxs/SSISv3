@@ -10,7 +10,39 @@ th {
     top: 0;
 }
 
+td {
+  vertical-align: middle;
+}
+
 td form,
 td button {
   display: inline-block;
+}
+
+#student_image {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid gray;
+}
+
+
+.student_image_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#student_info_image {
+  margin-top: 20px;
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+  border: 2px solid gray;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
