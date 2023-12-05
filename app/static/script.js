@@ -63,8 +63,11 @@ const fileInput = document.getElementById('file-input');
 const fileButton = document.getElementById('file-button');
 const imagePreview = document.getElementById('student_info_image');
 const imageUrlInput = document.getElementById('image_url');
-const imagePreviewContainer = document.getElementById('student_image_container')
+const imagePreviewContainer = document.getElementById('student_image_container');
 const csrfToken = document.querySelector("meta[name=csrf_token]").content;
+
+let originalImageUrl = imageUrlInput.value;
+let MB = 1024*1024;
 
 fileButton.addEventListener('click', () => {
   fileInput.click();
@@ -72,6 +75,20 @@ fileButton.addEventListener('click', () => {
 
 fileInput.addEventListener('change', async () => {
     try {
+        const selectedFile = fileInput.files[0];
+
+        if (!isImageFile(selectedFile)) {
+            alert("Invalid file. Please upload an image file (JPG, JPEG, or PNG).");
+            fileInput.value = ''; 
+            return;
+        }
+
+        if (selectedFile.size > MB) { 
+            alert("File size exceeds 1MB. Please choose a smaller file.");
+            fileInput.value = ''; // Clear the file input
+            return;
+        }
+
         const formData = new FormData();
         formData.append("file", fileInput.files[0]);
         formData.append("csrf_token", csrfToken);
@@ -86,21 +103,36 @@ fileInput.addEventListener('change', async () => {
         const data = await response.json();
 
         if (data && data.is_success) {
-
             const img = document.createElement("img");
             img.id = 'student_info_image';
             img.alt = "New Image Photo"
-            img.src = data.url
+            img.src = data.url;
 
             imagePreviewContainer.innerHTML = '';
             imagePreviewContainer.appendChild(img);
             
             imageUrlInput.value = data.url;
         } else {
-            // Handle the case where the upload was not successful
             console.error("Upload failed:", data);
+            
+            imageUrlInput.value = originalImageUrl;
+
+            const originalImg = document.createElement("img");
+            originalImg.id = 'student_info_image';
+            originalImg.alt = "Original Image Photo";
+            originalImg.src = originalImageUrl;
+
+            imagePreviewContainer.innerHTML = '';
+            imagePreviewContainer.appendChild(originalImg);
+
+            alert("Invalid file. Please upload a JPG, JPEG, or PNG file.");
         }
     } catch (error) {
         console.error("An error occurred:", error);
     }
 });
+
+function isImageFile(file) {
+  const acceptedImageTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  return file && acceptedImageTypes.includes(file.type);
+}

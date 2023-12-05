@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10" style="overflow: auto;">
             <h1 class="text-center" style="padding: 10px;">Edit Student</h1>
-            <form method="POST" class="form-control" style="max-height: 470px; overflow:auto;">
+            <form method="POST" class="form-control">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div id="student_image_container" class="form-group student_image_container">
                     <img id="student_info_image" src="{{ image_url or "https://res.cloudinary.com/dulew9heh/image/upload/v1701248545/image_nahubr.jpg" }}" alt="{{ id }}">
@@ -16,7 +16,8 @@
                 <div class="form-group  text-center">
                     <input id="image_url" type="text" name="image_url" value="{{ image_url or "https://res.cloudinary.com/dulew9heh/image/upload/v1701248545/image_nahubr.jpg" }}" hidden>
                     <input type="file" id="file-input" hidden>
-                    <button id="file-button" type="button" class="btn btn-primary col-md-4 mx-auto" style="margin-top: 10px;">Upload Image</button>
+                    <button id="file-button" type="button" class="btn btn-primary col-md-6 mx-auto" style="margin-top: 10px;">Upload Image</button>
+                    <p> Accepted Image Type: JPG, JPEG, PNG; Maximum Size: 1MB</p>
                 </div>
                 <div class="form-group">
                     <label for="student_id">Student ID</label>
@@ -61,6 +62,7 @@
                     </select>
                 </div> <br>
                 <button type="submit" class="btn btn-primary col-md-12">Update Student</button>
+                <button type="button" class="btn btn-secondary col-md-12" onclick="window.location.href='/students'" style="margin-top: 10px;">Back</button>
             </form>
         </div>
     </div>
